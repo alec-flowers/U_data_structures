@@ -31,7 +31,6 @@ class Group(object):
 
         return s
 
-
 #recursive solution to loop through groups and add users to set
 #check if user matches person in set
 
@@ -62,10 +61,12 @@ def is_user_in_group(user, group):
 
     if user in users:
         return True
-    else:
-        return False
+    return False
 
 if __name__ == "__main__":
+
+    #Test1   
+    print('-- Test 1 --') 
 
     parent = Group("parent")
     child = Group("child")
@@ -85,7 +86,14 @@ if __name__ == "__main__":
     parent.add_group(child)
     parent.add_group(child2)
 
-    print(parent)
-    print(child)
 
-    print(is_user_in_group('child2_user alex', child))
+    print(is_user_in_group('child2_user alex', parent))
+    print('The value should be: \nTrue')
+    #Test2
+    print('-- Test 2 --')
+    print(is_user_in_group('', parent))
+    print('The value should be: \nFalse')
+    #Test3 
+    print('-- Test 3 --')
+    print(is_user_in_group('a', parent))
+    print('The value should be: \nFalse')
