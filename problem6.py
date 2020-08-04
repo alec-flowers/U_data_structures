@@ -118,3 +118,16 @@ for i in element_2:
 
 print (union(linked_list_3,linked_list_4))
 print (intersection(linked_list_3,linked_list_4))
+
+def print_return(r):
+    for i in r:
+        print(str(i))
+
+    #Test1   
+    print('-- Test 1 --') 
+
+    #Test2
+    print('-- Test 2 --')
+
+    #Test3 
+    print('-- Test 3 --')
