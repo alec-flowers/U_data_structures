@@ -72,13 +72,16 @@ class LinkedListBlock():
             node = node.next
         return s
 
-blockchain = LinkedListBlock()
-blockchain.add_block('Hello')
-blockchain.add_block('My')
-blockchain.add_block('Name')
-blockchain.add_block('is')
+if __name__ == "__main__":
 
-print(blockchain)
+    blockchain = LinkedListBlock()
+    blockchain.add_block('Hello')
+    blockchain.add_block('My')
+    blockchain.add_block('Name')
+    blockchain.add_block('is')
+    blockchain.add_block('')
+
+    print(blockchain)
 
 
 
