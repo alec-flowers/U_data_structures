@@ -1,10 +1,10 @@
 Design Choices:
-Found this to be a similar problem as problem 2. Used recursion to loop through every item. I added them to a set which then makes the loopup O(1)
+I traverse each linked list and add each item to a set. For union I'm done and for intersection you can lookup the values against each other in O(1) time
 
 Time Complexity:
-O(N)
-Initial recursion to add items to the set is O(N) since we have to go look and check every item.
+O(N+M)
+Traversing the linked lists and adding the items to a set is O(N+M) time. 
 
 Space Complexity:
 O(N)
-The set is all of the users which could potentially be N.  
+Created a set that will be worst case same size as the linked lists.  
