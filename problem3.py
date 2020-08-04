@@ -29,11 +29,11 @@ class Node():
     def __lt__(self, other):
         return self.get_frequency() < other.get_frequency()
 
-def get_frequeny(message):
+def get_frequency(message):
     '''
     Returns frequency of lettters in a given string.
     Input: message (string) - string
-    Return: frequency_dict (dict) - dictionary with keys being letters and value being frequency in string
+    Output: frequency_dict (dict) - dictionary with keys being letters and value being frequency in string
     '''
     frequency_dict = dict()
     for letter in message:
@@ -46,9 +46,9 @@ def get_frequeny(message):
 
 def tree_to_data(root):
     '''
-    
-    Input:
-    Return: code_dict (dict) - 
+    Encode data using the huffman tree. 
+    Input: root (Node) - huffman tree to traverse
+    Return: code_dict (dict) - encoded data using huffman tree
     '''
     code_dict = {}
     bits = ''
@@ -68,8 +68,10 @@ def tree_to_data(root):
     return code_dict
 
 def huffman_encoding(message):
-    
-    frequency_dict = get_frequeny(message)
+    'Take a message, create a huffman tree, and encode the data'
+    assert isinstance(message, str)
+    assert len(message)>0
+    frequency_dict = get_frequency(message)
 
     #create heap
     heap = []
@@ -100,7 +102,8 @@ def huffman_encoding(message):
     return encoded_data, tree
 
 def huffman_decoding(encoded_data, tree):
-    
+    'Decode data using huffman tree'
+
     node = tree
     decoded_data = ''
     index = 0
@@ -121,6 +124,9 @@ def huffman_decoding(encoded_data, tree):
     return decoded_data
 
 if __name__ == "__main__":
+    
+    #Test1   
+    print('-- Test 1 --') 
     codes = {}
 
     a_great_sentence = "Halleluja, Halleluja, Halleluja!"
@@ -137,3 +143,21 @@ if __name__ == "__main__":
 
     print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
     print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+    #Test2
+    print('-- Test 2 --')
+    sentence2 = ' '
+    print('Message: {}'.format(sentence2))
+    encoded_data2, tree2 = huffman_encoding(sentence2)
+
+    decoded_data2 = huffman_decoding(encoded_data2, tree2)
+    print('Decoded Data: '.format(decoded_data2))
+
+    #Test3 
+    print('-- Test 3 --')
+    sentence3 = '1asdflk234r0iwqer0wqelrqwenk;jf[qwe9   0rqweorlqlwetnroqe[w0qweqweerj;E\][\[\wefw'
+    print('Message: {}'.format(sentence3))
+    encoded_data3, tree3 = huffman_encoding(sentence3)
+
+    decoded_data3 = huffman_decoding(encoded_data3, tree3)
+    print('Decoded Data: {}'.format(decoded_data3))
