@@ -74,6 +74,8 @@ class LinkedListBlock():
 
 if __name__ == "__main__":
 
+    #Test1
+    print('-- Test 1 --')
     blockchain = LinkedListBlock()
     blockchain.add_block('Hello')
     blockchain.add_block('My')
@@ -82,6 +84,17 @@ if __name__ == "__main__":
     blockchain.add_block('')
 
     print(blockchain)
+
+    print('\n-- Test 2 --')
+    blockchain2 = LinkedListBlock()
+    blockchain2.add_block('Hello')
+
+    print(blockchain2)
+
+    print('\n-- Test 3 --')
+    blockchain3 = LinkedListBlock()
+
+    print(blockchain3)
 
 
 
