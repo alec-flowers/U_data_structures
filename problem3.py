@@ -23,6 +23,9 @@ class Node():
     def get_frequency(self):
         return self.frequency
 
+    def interior(self):
+        return self.value is None
+
     def __repr__(self):
         return "Node(freq: {}, value: {})".format(self.get_frequency(),self.get_value())
     
@@ -56,12 +59,14 @@ def tree_to_data(root):
     def traverse(root,bits):
         'Recursive function that traverses huffman tree to return bit values for each final node'
 
-        if root.left == None and root.right == None:
+        if not root.interior():
             code_dict[root.value] = bits
-            return
+            return 
         else:
-            traverse(root.left, bits+'0')
-            traverse(root.right, bits+'1')
+            if root.left != None:
+                traverse(root.left, bits+'0')
+            if root.right != None:
+                traverse(root.right, bits+'1')
 
     traverse(root,bits)
 
@@ -72,14 +77,12 @@ def huffman_encoding(message):
     assert isinstance(message, str)
     assert len(message)>0
     frequency_dict = get_frequency(message)
-
     #create heap
     heap = []
     for letter, freq in frequency_dict.items():
         node = Node(freq)
         node.set_value(letter)
         heapq.heappush(heap, node)
-
     #build huffman tree
     while len(heap) > 1:
 
@@ -93,6 +96,14 @@ def huffman_encoding(message):
         heapq.heappush(heap, interior_node)
 
     tree = heap[0]
+
+    if not heap[0].interior():
+        print('a')
+        interior_node = Node(heap[0].get_frequency())
+        interior_node.set_left(heap[0])
+        interior_node.set_right(Node(None))
+        tree = interior_node
+    
     letter_to_binary = tree_to_data(tree)
     encoded_data = ''
 
@@ -101,26 +112,26 @@ def huffman_encoding(message):
 
     return encoded_data, tree
 
+
 def huffman_decoding(encoded_data, tree):
     'Decode data using huffman tree'
 
     node = tree
     decoded_data = ''
     index = 0
-
     while index < len(encoded_data):
-
+        
         if encoded_data[index] == '0':
             node = node.left
         else:
             node = node.right
 
-        if (node.left == None) & (node.right == None):
+        if not node.interior():
             decoded_data += node.get_value()
             node = tree
         
-        index+=1
-
+        index += 1
+        
     return decoded_data
 
 if __name__ == "__main__":
@@ -161,3 +172,12 @@ if __name__ == "__main__":
 
     decoded_data3 = huffman_decoding(encoded_data3, tree3)
     print('Decoded Data: {}'.format(decoded_data3))
+
+    #Test4
+    print('-- Test 4 --')
+    sentence4 = 'AAA'
+    print('Message: {}'.format(sentence4))
+    encoded_data4, tree4 = huffman_encoding(sentence4)
+
+    decoded_data4 = huffman_decoding(encoded_data4, tree4)
+    print('Decoded Data: {}'.format(decoded_data4))

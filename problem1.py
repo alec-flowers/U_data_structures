@@ -115,7 +115,7 @@ class LRU_cache(object):
 
         def set(self, key, value):
                 'Add key and value. If above capacity remove oldest used value' 
-                if self.capacity == 0:
+                if self.capacity <= 0:
                         return
 
                 if self.size >=  self.capacity:

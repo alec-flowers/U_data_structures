@@ -15,6 +15,12 @@ def find_files(suffix, path):
     Returns:
        a list of paths
     """
+    if not os.path.isdir(path):
+      if path.endswith(suffix) and suffix != '':
+        return [path]
+      else:
+        return []
+
     subdirectory = os.listdir(path)
     file_list = []
 
@@ -66,4 +72,15 @@ if __name__ == "__main__":
   r3 = []
   print('Expect to see: ')
   print(r3)
+
+  #Test4
+  print('-- Test 4 --')
+  my_path4 = "./Test/a/b/c/e/f/hello.txt"
+  suffix4 = ".txt"
+  path_list4 = find_files(suffix4,my_path4)
+  print(path_list4)
+  
+  r4 = ["./Test/a/b/c/e/f/hello.txt"]
+  print('Expect to see: ')
+  print(r4)
 
